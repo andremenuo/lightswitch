@@ -19,16 +19,11 @@ const ps=[
 ["SPA WINTER","spa-winter-off.jpg","spa-winter-on.jpg"],
 ["SPA ROUND","spa-round-off.jpg","spa-round-on.jpg"],
 ["SPA BACKYARD","spa-backyard-off.jpg","spa-backyard-on.jpg"],
-["KLÖVING","https://www.ikea.com.tw/dairyfarm/tw/images/418/1341867_PE948915_S5.jpg"],
-["SKAFTET","https://content.elmueble.com/medio/2021/07/01/lampara-de-pie-ikea-skaftet_cf9cfdc4_600x600.jpg"],
-["STORSEGEL","https://www.ikea.com.tw/dairyfarm/tw/images/857/1285773_PE933400_S4.webp"],
-["NYMÅNE","https://i.greatcatalog.net/v/16/16753/16753-1-588%402x.jpg"],
-["ÅRSTID","https://www.ikea.cn/cn/en/images/products/arstid-table-lamp-white__0609329_PE684454_S4.JPG"]
 ];
 const g=document.getElementById("grid");
 ps.forEach(([p,off,on])=>{
  const scene=on?'<div class="scene paired"><img class="off-img" src="'+off+'" alt="'+p+' av"><img class="on-img" src="'+on+'" alt="'+p+' på"></div>':'<div class="scene"><img loading="lazy" src="'+off+'" alt="'+p+'"></div>';
- g.insertAdjacentHTML("beforeend",'<article class="card">'+scene+'<div class="meta"><span>'+p+'</span><span class="status">'+(on?'REAL OFF → ON':'OFF → ON TEST')+'</span></div></article>');
+ g.insertAdjacentHTML("beforeend",'<article class="card">'+scene+'<div class="meta"><span>'+p+'</span></div></article>');
 });
 document.getElementById("toggle").onclick=()=>{document.body.classList.toggle("on");document.getElementById("label").textContent=document.body.classList.contains("on")?"LIGHTS ON":"LIGHTS OFF"};
 </script></body></html>
