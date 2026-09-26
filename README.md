@@ -23,3 +23,12 @@ The original OFF image is the immutable source of truth. The engine must never r
 - Failed validation = rejected, never published.
 
 This first scaffold intentionally has no paid API dependency. Relighting quality is the next experiment; geometry safety is enforced first.
+
+
+### Batch experiment
+
+Put real lamp OFF images in `image-engine/input/`, then run:
+
+`cd image-engine && pip install -r requirements.txt && python src/batch.py input`
+
+The batch runner proposes conservative masks, creates ON candidates, validates the pixel boundary, and writes `output/summary.json`. Automatic masks are experimental; passing the safety validator does not yet mean the lighting result is visually good.
