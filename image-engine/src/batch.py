@@ -12,6 +12,7 @@ def main():
     ap.add_argument("input_dir", nargs="?", default="input")
     ap.add_argument("--output-dir", default="output")
     ap.add_argument("--mask-dir", default="masks")
+    ap.add_argument("--manifest", default=None, help="Optional JSON array of source image paths")
     args = ap.parse_args()
 
     inp, outdir, maskdir = Path(args.input_dir), Path(args.output_dir), Path(args.mask_dir)
@@ -19,7 +20,12 @@ def main():
     maskdir.mkdir(parents=True, exist_ok=True)
     summary = []
 
-    for path in sorted(p for p in inp.iterdir() if p.suffix.lower() in SUPPORTED):
+    paths = sorted(p for p in inp.iterdir() if p.suffix.lower() in SUPPORTED)
+    if args.manifest:
+        manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8"))
+        paths = [Path(p) for p in manifest]
+
+    for path in paths:
         src = Image.open(path).convert("RGB")
         mask = propose_mask(src)
         mask_path = maskdir / f"{path.stem}-mask.png"
